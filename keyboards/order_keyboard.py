@@ -54,6 +54,7 @@ def brand_choose_keyboard():
     builder.add(InlineKeyboardButton(text="Назад", callback_data="order"))
     return builder.as_markup()
 
+
 def color_choose_keyboard():
     builder = InlineKeyboardBuilder()
     for color in get_all_colors():

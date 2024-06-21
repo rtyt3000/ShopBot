@@ -41,13 +41,16 @@ def get_products(count, color, sort_by=None, brand=None):
     con = psycopg2.connect(dbname="ShopDB", host="localhost", user="postgres", password="QwerTY", port="5432")
     cur = con.cursor()
     if sort_by == "asc":
-        cur.execute(f"SELECT * FROM products WHERE color = %s ORDER BY price  LIMIT {5} OFFSET {5 * (count - 1)}", (color,))
+        cur.execute(f"SELECT * FROM products WHERE color = %s ORDER BY price  LIMIT {5} OFFSET {5 * (count - 1)}",
+                    (color,))
     elif sort_by == "desc":
         cur.execute(f"SELECT * FROM products WHERE color = %s ORDER BY price DESC LIMIT {5} OFFSET {5 * (count - 1)}")
     elif sort_by == "brand":
-        cur.execute(f"SELECT * FROM products WHERE color = %s  WHERE brand = %s LIMIT {5} OFFSET {5 * (count - 1)}", (brand, color,))
+        cur.execute(f"SELECT * FROM products WHERE color = %s  WHERE brand = %s LIMIT 5 OFFSET {5 * (count - 1)}",
+                    (brand, color,))
     else:
-        cur.execute(f"SELECT * FROM products WHERE color = %s  ORDER BY id LIMIT {5} OFFSET {5 * (count - 1)}", (color,))
+        cur.execute(f"SELECT * FROM products WHERE color = %s  ORDER BY id LIMIT {5} OFFSET {5 * (count - 1)}",
+                    (color,))
     products = cur.fetchmany(5)
     return products
 

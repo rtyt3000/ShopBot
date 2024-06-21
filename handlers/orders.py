@@ -6,7 +6,8 @@ from aiogram import Router, F
 from db.order import create_order, change_order_status
 from db.user import get_user, add_balance, get_all_admins
 from keyboards.back_keyboards import back_to_profile_keyboard
-from keyboards.order_keyboard import order_keyboard, product_accept_keyboard, back_keyboard, sorting_keyboard, brand_choose_keyboard, color_choose_keyboard
+from keyboards.order_keyboard import (order_keyboard, product_accept_keyboard,
+                                      back_keyboard, sorting_keyboard, brand_choose_keyboard, color_choose_keyboard)
 from keyboards import profile_keyboard
 
 router = Router()
@@ -55,7 +56,8 @@ async def page(query: CallbackQuery):
     sort_by = query.data.split("_")[3]
     if sort_by == "brand":
         brand = query.data.split("_")[4]
-        await query.message.edit_reply_markup(reply_markup=order_keyboard(page_number, color=color, sort_by=sort_by, brand=brand))
+        await query.message.edit_reply_markup(reply_markup=order_keyboard(page_number,
+                                                                          Color=color, sort_by=sort_by, brand=brand))
         return
 
     await query.message.edit_reply_markup(reply_markup=order_keyboard(page_number, sort_by=sort_by))
